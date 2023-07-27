@@ -1,0 +1,162 @@
+.companyBanner {
+  background-color: #2c3333;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 100px;
+  flex-direction: column;
+}
+
+.companyBannerHeading {
+  margin: 0 0 25px 0;
+  font-size: 50px;
+  color: #0E8388;
+}
+
+.companyBannerLabel {
+  font-size: 25px;
+  margin-bottom: 25px;
+}
+
+.emailControlsContainer {
+  display: flexk;
+}
+
+.emailControl {
+  padding: 7px 13px;
+  font-size: 20px;
+  outline: none;
+  border: none;
+}
+
+.subscribeButton {
+  padding: 7px 13px;
+  font-size: 20px;
+  outline: none;
+  border: none;
+  background-color: crimson;
+  color: #fff;
+}
+
+.subscribeButton:hover {
+  background-color: green;
+}
+
+.companyAbout {
+  background-color: #2E4F4F;
+  color: #fff;
+  display: flex;
+  align-items: left;
+  padding: 100px;
+  flex-direction: row;
+  font-style: oblique;
+}
+
+.companyAboutHeading {
+  padding: 10px;
+
+}
+
+.companyBannerLabel {
+  font-size: large;
+  font-style: normal;
+  font-display: dull;
+}
+
+.companyBannerLabel-2 {
+  font: optional;
+  font-style: initial;
+}
+
+.logoDisney {
+  align-items: right;
+}
+
+.TouchButton {
+  padding: 15px;
+  align-items: left;
+  font-size: larger;
+  font-style: normal;
+}
+
+.TheValues {
+  background-color: #0E8388;
+  color: #fff;
+  display: flexbox;
+  align-items: right;
+  padding: 30px;
+  flex-direction: row;
+  font-style: italic;
+}
+
+.TheValuesHeading {
+  font-size: larger;
+  font-style: inherit;
+  font-size: x-large;
+  padding: 20px;
+}
+
+.TheValuesHeadingMission {
+  font-size: large;
+  font-style: normal;
+}
+
+.logoEagle {
+  align-items: left;
+}
+
+.TheValuesHeadingMission-1 {
+  font-size: large;
+  font-style: normal;
+}
+
+.Services {
+  background-color: #eaecec;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 100px;
+  flex-direction: column;
+}
+
+.ServicesTopicHeading {
+  font-size: 30px;
+  font-style: normal;
+}
+
+.ServicesTopicLine {
+  font-size: large;
+  margin-bottom: 25px;
+}
+
+.ServicesTopicLine {
+  align-items: center;
+  padding: 20px;
+}
+
+.ServicesPower {
+  padding: 50px;
+}
+
+.portfolio {
+  background-color: #010e0e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 100px;
+  flex-direction: column;
+}
+
+.portfoliolabel {
+  font-style: normal;
+  font-size: 30px;
+  padding: 50px;
+  color: #fff;
+}
+
+.portfoliolabelbrief {
+  color: #eaecec;
+  font-style: initial;
+  padding: 65px;
+}

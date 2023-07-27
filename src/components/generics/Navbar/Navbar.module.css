@@ -1,0 +1,63 @@
+.navbar {
+  padding: 10px 20px;
+  background-color: #2c3333;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logoContainer {
+  width: 85px;
+  height: auto;
+}
+
+.logoImage {
+  width: 100%;
+  height: 100%;
+}
+
+.navbarLinksContainer {
+  display: grid;
+  grid-auto-columns: max-content;
+  grid-auto-flow: column;
+  column-gap: 20px;
+}
+
+.navbarLinksContainer:hover {
+  color: aqua;
+}
+
+.navbarLink {
+  color: #fff;
+  font-size: 22px;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.navbarLink:hover {
+  color: rgb(135, 201, 201);
+}
+
+.dropdownItem {
+  padding: right;
+  font-size: medium;
+}
+
+.HmName {
+  background-color: rgb(205, 226, 226);
+}
+
+.Hm {
+  background-color: rgb(156, 212, 212);
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.signoutbutton {
+  border-radius: 10px;
+}
+
+.logoHM {
+  padding: 500% 10% 50% 10;
+}

@@ -1,0 +1,22 @@
+.About {
+  background-color: #2c3b3b;
+  color: #fff;
+  display: flex;
+  align-items: left;
+  padding: 100px;
+  flex-direction: row;
+  font-style: oblique;
+}
+
+.AboutHeading {
+  padding: 10px;
+  color: #fff;
+
+}
+
+.AboutMore {
+
+  font-size: large;
+  font-style: normal;
+  font-display: dull;
+}

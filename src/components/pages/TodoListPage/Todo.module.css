@@ -1,46 +1,10 @@
-body {
-  margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-.main-container {
-  background-image: url("C:\Users\Asus\Desktop\MyNewFolder\the-crosser\src\115191.jpg");
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-
-.login.state {
-  background-color: #636060;
-  font-display: stable;
-  height: max-content;
-  line-height: 0cqh;
-  color-scheme: black;
-  color-interpolation-filters: auto;
-}
-
-
-.center-container {
-  height: 500px;
-  width: 40vw;
-}
-
-.app-heading {
-  padding: 4px;
-  color: white;
-  /* text-align: center; */
-  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-  text-transform: uppercase;
-}
-
-.input-container {
+.inputContainer {
   display: flex;
   justify-content: center;
   margin-bottom: 10px;
 }
 
-.input-box-todo {
+.inputBoxTodo {
   margin-left: 50px;
   width: 70%;
   height: 40px;
@@ -53,7 +17,7 @@ body {
   font-size: large;
 }
 
-.add-btn {
+.addBtn {
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -68,17 +32,78 @@ body {
   transition: 0.3s;
 }
 
-.add-btn:active {
+.loginState {
+  background-color: #636060;
+  font-display: stable;
+  height: max-content;
+  line-height: 0cqh;
+  color-scheme: black;
+  color-interpolation-filters: auto;
+}
+
+
+.centerContainer {
+  height: 500px;
+  width: 350px;
+}
+
+.appHeading {
+  padding: 4px;
+  color: white;
+  /* text-align: center; */
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  text-transform: uppercase;
+}
+
+.inputContainer {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.inputBoxTodo {
+  margin-left: 50px;
+  width: 70%;
+  height: 40px;
+  border-radius: 14px;
+  border: 1px solid black;
+  padding-left: 10px;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
+  outline: none;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-size: large;
+}
+
+.addBtn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background-color: #316fc1;
+  color: white;
+  font-weight: bolder;
+  font-size: larger;
+  margin-left: 10px;
+  cursor: pointer;
+  box-shadow: 0px 5px 10px rgba(11, 10, 10, 0.3);
+  transition: 0.3s;
+}
+
+.addBtn:hover {
+  background-color: rgb(20, 141, 221);
+}
+
+.addBtn:active {
   box-shadow: none;
 }
 
-.list-container {
+.listContainer {
   display: flex;
   align-items: center;
   margin-top: 5px;
 }
 
-.list-item {
+.listItem {
   list-style-type: none;
   background-color: #62676e;
   border: 2px solid rgb(161, 158, 158);
@@ -94,7 +119,7 @@ body {
   margin-top: 10px;
 }
 
-.list-item-completed-text {
+.listTtemCompletedText {
   text-decoration: line-through;
 }
 
@@ -116,67 +141,54 @@ body {
 
 .icon-delete:hover {
   color: rgb(212, 5, 5);
-
-
-
 }
 
-.login-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-image: url("C:\Users\Asus\Desktop\MyNewFolder\login-page\src\2.jpg");
-}
-
-.login-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 60px;
-  background-color: rgb(117, 115, 115);
-  border-radius: 10px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-}
-
-.login-form h1 {
-  margin-bottom: 20px;
-  color: #333;
-}
-
-.login-form input {
-  width: 100%;
+/* New CSS for todo list item */
+.todoItemContainer {
   padding: 10px;
-  margin-bottom: 10px;
-  border: 1px solid #ccc;
-  border-radius: 3px;
-}
-
-.login-form button {
-  width: 100%;
-  padding: 10px;
-  background-color: #064d88;
-  color: white;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-}
-
-.login-form button:hover {
-  background-color: #555;
-}
-
-.welcome-message {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
-  background-color: white;
   border-radius: 5px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  color: #fff;
+  background-color: rgb(83, 102, 102);
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
 }
 
-.welcome-message h1 {
-  margin-bottom: 20px;
-  color: #333;
+.todoControlsContainer {
+  display: grid;
+  grid-auto-columns: max-content;
+  grid-auto-flow: column;
+  column-gap: 10px;
+}
+
+.todoItemControl,
+.deleteControl {
+  outline: none;
+  border: #316fc1;
+  background-color: #ccc;
+  padding: 3px 10px;
+  font-size: 16px;
+}
+
+.deleteControl {
+  background-color: crimson;
+  color: #fff;
+}
+
+.todoLabel {
+  font-size: 18px;
+}
+
+.todoLabel.complete {
+  text-decoration: line-through;
+}
+
+.todoUpdateInputControl {
+  background-color: inherit;
+  border: none;
+  border-bottom: 1px solid #fff;
+  color: #fff;
+  font-size: 15px;
+  padding: 3px 6px;
+  outline: none;
 }
