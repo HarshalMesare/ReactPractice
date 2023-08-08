@@ -1,9 +1,9 @@
-import {combineReducers} from '@reduxjs/toolkit';
+import { combineReducers } from '@reduxjs/toolkit';
 
-import counterReducer from './slices/counter.slice';
+import userReducer from './slices/users.slice';
 
 const rootReducer = combineReducers({
-  counterState: counterReducer
+  usersState: userReducer
 });
 
 export default rootReducer;

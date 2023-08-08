@@ -1,77 +1,91 @@
-import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { addQuote, deleteQuote } from './redux/actions';
-import QuoteCard from './QuoteCard';
+import * as React from 'react';
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogTitle from '@mui/material/DialogTitle';
+import Navbar from '../generics/Navbar/Navbar';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
+import styles from '../../components/pages/Quotes.module.css';
+import { DialogContent } from '@mui/material';
 
-const Quotes = () => {
-  const quotes = useSelector(state => state.quotes);
-  const dispatch = useDispatch();
+export default function ResponsiveDialog() {
+  const [open, setOpen] = React.useState(false);
+  const [quote, setQuote] = React.useState('');
+  const [name, setName] = React.useState('');
+  const [timestamp, setTimestamp] = React.useState('');
+  const [country, setCountry] = React.useState('');
+  const [type, setType] = React.useState('');
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
 
-  const [quoteForm, setQuoteForm] = useState({
-    quote: '',
-    name: '',
-    country: '',
-    type: '',
-  });
-
-  const handleAddQuote = () => {
-    dispatch(addQuote({ ...quoteForm }));
-    setQuoteForm({
-      quote: '',
-      name: '',
-      country: '',
-      type: '',
-    });
+  const handleClickOpen = () => {
+    setOpen(true);
   };
 
-  const handleDeleteQuote = (quoteId) => {
-    const confirmDelete = window.confirm('Do you really want to delete this quote?');
-    if (confirmDelete) {
-      dispatch(deleteQuote(quoteId));
-    }
+  const handleClose = () => {
+    setOpen(false);
   };
-
+   
+  const handleDeleteQuote = () => {
+    setOpen(false);
+  };
   return (
     <div>
-      <h1>Quotes</h1>
-      <div className="quote-form">
+    <Navbar />
+    <Button className={styles.boxvox} variant="outlined" onClick={handleClickOpen}>
+      Add-QUOTES
+    </Button>
+    <Dialog
+      fullScreen={fullScreen}
+      open={open}
+      onClose={handleClose}
+      aria-labelledby="responsive-dialog-title"
+    >
+      <DialogTitle className={styles.openbox} id="responsive-dialog-title">
+        Add your quote here:
+      </DialogTitle>
+      <DialogContent className={styles.dialogContent}>
         <input
           type="text"
-          placeholder="Quote"
-          value={quoteForm.quote}
-          onChange={e => setQuoteForm({ ...quoteForm, quote: e.target.value })}
+          placeholder="Quote:-"
+          value={quote}
+          onChange={(e) => setQuote(e.target.value)}
         />
         <input
           type="text"
-          placeholder="Name"
-          value={quoteForm.name}
-          onChange={e => setQuoteForm({ ...quoteForm, name: e.target.value })}
+          placeholder="Name:-"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
         />
         <input
           type="text"
-          placeholder="Country"
-          value={quoteForm.country}
-          onChange={e => setQuoteForm({ ...quoteForm, country: e.target.value })}
+          placeholder="Timestamp:-"
+          value={timestamp}
+          onChange={(e) => setTimestamp(e.target.value)}
         />
         <input
           type="text"
-          placeholder="Type"
-          value={quoteForm.type}
-          onChange={e => setQuoteForm({ ...quoteForm, type: e.target.value })}
+          placeholder="Country:-"
+          value={country}
+          onChange={(e) => setCountry(e.target.value)}
         />
-        <button onClick={handleAddQuote}>Add Quote</button>
-      </div>
-      <div className="quote-list">
-        {quotes.map((quote, index) => (
-          <QuoteCard
-            key={index}
-            quote={quote}
-            onDelete={() => handleDeleteQuote(index)}
-          />
-        ))}
-      </div>
-    </div>
+        <input
+          type="text"
+          placeholder="Type:-"
+          value={type}
+          onChange={(e) => setType(e.target.value)}
+        />
+      </DialogContent>
+      <DialogActions className={styles.dialogActions}>
+        <Button onClick={handleClose} autoFocus>
+          Disagree
+        </Button>
+        <Button onClick={handleDeleteQuote} autoFocus>
+          Yes
+        </Button>
+      </DialogActions>
+    </Dialog>
+  </div>
   );
-};
-
-export default Quotes;
+}
