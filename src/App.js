@@ -5,6 +5,8 @@ import { About } from './components/About'
 import LoginPage from './components/pages/LoginPage/LoginPage'
 import Home from './components/pages/Home/Home'
 import Table from './components/pages/TodoListPage/Table'
+import Quotes from './components/pages/Quotes'
+
 import {
   BrowserRouter as Router,
   Routes,
@@ -21,6 +23,7 @@ function App() {
           <Route path="/todo" element={<Todo />} />
           <Route path="/about" element={<About />} />
           <Route path="/table" element={<Table />} />
+          <Route path="/quotes" element={<Quotes />} />
         </Routes>
       </Router>
     </div>

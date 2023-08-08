@@ -28,6 +28,8 @@ const Navbar = () => {
         <Link to={'/todo'} className={styles.navbarLink}>Todo</Link>
         <Link to={'/about'} className={styles.navbarLink}>About</Link>
         <Link to={'/table'} className={styles.navbarLink}>Table</Link>
+        <Link to={'/quotes'} className={styles.navbarLink}>quotes</Link>
+
       </div>
       <ul>
         <li>
