@@ -18,6 +18,7 @@ export default function ResponsiveDialog() {
   const [type, setType] = React.useState('');
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
+  const [savedData, setSavedData] = React.useState([]);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -30,6 +31,26 @@ export default function ResponsiveDialog() {
   const handleDeleteQuote = () => {
     setOpen(false);
   };
+
+  const handleSaveQuote = () => {
+    const newQuoteData = {
+      quote: quote,
+      name: name,
+      timestamp: timestamp,
+      country: country,
+      type: type,
+    };
+    setSavedData([...savedData, newQuoteData]);
+
+    setQuote('');
+    setName('');
+    setTimestamp('');
+    setCountry('');
+    setType('');
+
+    setOpen(false); 
+  };
+
   return (
     <div>
     <Navbar />
@@ -76,16 +97,44 @@ export default function ResponsiveDialog() {
           value={type}
           onChange={(e) => setType(e.target.value)}
         />
-      </DialogContent>
-      <DialogActions className={styles.dialogActions}>
-        <Button onClick={handleClose} autoFocus>
-          Disagree
-        </Button>
-        <Button onClick={handleDeleteQuote} autoFocus>
-          Yes
-        </Button>
-      </DialogActions>
-    </Dialog>
-  </div>
+ 
+       <DialogActions className={styles.dialogActions}>
+          <Button onClick={handleClose} autoFocus>
+            Disagree
+          </Button>
+          <Button onClick={handleSaveQuote} autoFocus>
+            Yes
+          </Button>
+        </DialogActions>
+        </DialogContent>
+      </Dialog>
+
+     {savedData.length > 0 && (
+        <div>
+          <h2>Saved Quotes:</h2>
+          <ul>
+            {savedData.map((data, index) => (
+              <li key={index}>
+                <strong>Quote: </strong>
+                {data.quote}
+                <br />
+                <strong>Name: </strong>
+                {data.name}
+                <br />
+                <strong>Timestamp: </strong>
+                {data.timestamp}
+                <br />
+                <strong>Country: </strong>
+                {data.country}
+                <br />
+                <strong>Type: </strong>
+                {data.type}
+                <hr />
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </div>
   );
 }
