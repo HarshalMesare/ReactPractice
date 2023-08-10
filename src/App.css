@@ -180,3 +180,15 @@ body {
   margin-bottom: 20px;
   color: #333;
 }
+input,
+select,
+textarea {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: inherit;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 19px;
+  outline: none;
+}

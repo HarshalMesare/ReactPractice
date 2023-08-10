@@ -5,8 +5,7 @@ import { About } from './components/About'
 import LoginPage from './components/pages/LoginPage/LoginPage'
 import Home from './components/pages/Home/Home'
 import Table from './components/pages/TodoListPage/Table'
-import Quotes from './components/pages/Quotes'
-
+import Quotes from './components/pages/Quotes/Quotes'
 import {
   BrowserRouter as Router,
   Routes,

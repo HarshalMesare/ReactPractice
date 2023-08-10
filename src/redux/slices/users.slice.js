@@ -10,7 +10,7 @@ const usersSlice = createSlice({
   reducers: {
     addUser: (state, action) => {
       console.log(state, action);
-    }
+    }   
   }
 });
 

@@ -58,7 +58,7 @@ const rows = [
     number: '82826732526'
   },
   {
-    id: 6,
+    id: 6,  
     name: 'allu arjun ',
     department: 'IT',
     designation: 'Angular Developer',
