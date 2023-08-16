@@ -1,4 +1,5 @@
-import * as React from 'react';
+// import * as React from 'react';
+import React, { useState } from 'react'
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -14,8 +15,16 @@ import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
+// import { usersActions } from '../../../redux/slices/users.slice';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import axios from 'axios';
+
+
 
 export default function ResponsiveDialog() {
+  const dispatch = useDispatch();
+  const userData = useSelector((state) => state.userData.users);
   const [open, setOpen] = React.useState(false);
   const [quote, setQuote] = React.useState('');
   const [name, setName] = React.useState('');
@@ -23,10 +32,13 @@ export default function ResponsiveDialog() {
   const [country, setCountry] = React.useState('');
   const [type, setType] = React.useState('');
   const theme = useTheme();
-  const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
-  const [savedData, setSavedData ] = React.useState([]);
+  const [savedData, setSavedData] = React.useState([]);
   const [editIndex, setEditIndex] = React.useState(-1);
   const [deleteIndex, setDeleteIndex] = React.useState(-1);
+  const savedQuotesRef = React.useRef(null);
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(false);
+
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -36,28 +48,45 @@ export default function ResponsiveDialog() {
     setOpen(false);
   };
 
-  const handleDeleteQuote = () => {
-    setOpen(false);
-  };
-
   const handleSaveQuote = () => {
-    const newQuoteData = {
+    const editedQuoteData = {
       quote: quote,
       name: name,
       timestamp: timestamp,
       country: country,
       type: type,
+      color: savedData[editIndex]?.color || getRandomColor(),
     };
-    setSavedData([...savedData, newQuoteData]);
+
+    const updatedSavedData = [...savedData];
+    if (editIndex === -1) {
+      updatedSavedData.push(editedQuoteData);
+    } else {
+      updatedSavedData[editIndex] = editedQuoteData;
+    }
+    setSavedData(updatedSavedData);
 
     setQuote('');
     setName('');
     setTimestamp('');
     setCountry('');
     setType('');
-
+    setEditIndex(-1);
     setOpen(false);
+
+    if (savedQuotesRef.current) {
+      savedQuotesRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
   };
+
+  function getRandomColor() {
+    const letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  }
 
   const handleEdit = (index) => {
     const editedQuote = savedData[index];
@@ -66,7 +95,7 @@ export default function ResponsiveDialog() {
     setCountry(editedQuote.country);
     setType(editedQuote.type);
     setEditIndex(index);
-    setOpen(true); 
+    setOpen(true);
   };
 
   const handleDelete = (index) => {
@@ -78,6 +107,44 @@ export default function ResponsiveDialog() {
     setSavedData(updatedData);
     setDeleteIndex(-1);
   };
+
+  useEffect(() => {
+    loadPosts();
+  }, []);
+
+  async function loadPosts() {
+    setLoading(true);
+    try {
+      const response = await axios.get('https://jsonplaceholder.typicode.com/posts');
+      if (response.status === 200) {
+        setPosts(response.data);
+      }
+      setLoading(false);
+    } catch (exception) {
+      console.log(exception);
+      setLoading(false);
+    }
+  }
+
+  async function handleAddPost() {
+    setLoading(true);
+    try {
+      const params = {
+        title: 'Test Post',
+        body: 'Content Dummy',
+        userId: 1
+      };
+      const response = await axios.post('https://jsonplaceholder.typicode.com/posts', params);
+      if (response.status === 201) {
+        alert('Post successfully created!');
+      }
+      setLoading(false);
+
+    } catch (exception) {
+      console.log(exception);
+      setLoading(false);
+    }
+  }
 
   return (
     <div>
@@ -95,7 +162,7 @@ export default function ResponsiveDialog() {
         aria-labelledby="responsive-dialog-title"
       >
         <DialogTitle className={styles.openbox} id="responsive-dialog-title">
-        {editIndex === -1 ? 'Add your quote here:' : 'Edit your quote:'}
+          {editIndex === -1 ? 'Add your quote here:' : 'Edit your quote:'}
         </DialogTitle>
         <DialogContent className={styles.dialogContent}>
           <input
@@ -110,14 +177,8 @@ export default function ResponsiveDialog() {
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
-          {/* <input
-            type="text"
-            placeholder="Timestamp:-"
-            value={timestamp}
-            onChange={(e) => setTimestamp(e.target.value)}
-          /> */}
-        
-           <FormControl>
+
+          <FormControl>
             <InputLabel>Country:</InputLabel>
             <Select
               value={country}
@@ -155,25 +216,58 @@ export default function ResponsiveDialog() {
       </Dialog>
 
       <div className={styles.savedQuotes}>
-      {savedData.map((quoteData, index) => (
-          <div key={index} className={styles.savedQuote}>
-            <p className={styles.quoteText}>{quoteData.quote}</p>
-            <p className={styles.detailText}>{quoteData.name}</p>
-            <p className={styles.detailText}>{quoteData.country}</p>
-            <p className={styles.detailText}>{quoteData.type}</p>
-            <div className={styles.actions}>
-              <button onClick={() => handleEdit(index)}>
-                <FontAwesomeIcon icon={faEdit} />
-              </button>
-              <button onClick={() => handleDelete(index)}>
-                <FontAwesomeIcon icon={faTrash} />
-              </button>
-            </div>
+        {savedData.map((quoteData, index) => (
+          <div
+            key={index}
+            className={styles.savedQuote}
+            style={{ backgroundColor: quoteData.color }}>
+            {editIndex === index ? (
+              <>
+                {/* Your input fields for editing */}
+                {/* <input
+                  type="text"
+                  placeholder="Quote:-"
+                  value={quote}
+                  onChange={(e) => setQuote(e.target.value)}
+                />
+                <input
+                  type="text"
+                  placeholder="Name:-"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+                <input
+                  type="text"
+                  placeholder="Country:-"
+                  value={country}
+                  onChange={(e) => setCountry(e.target.value)}
+                />
+                <input
+                  type="text"
+                  placeholder="Type:-"
+                  value={type}
+                  onChange={(e) => setType(e.target.value)}
+                /> */}
+                <h4>Test</h4>
+              </>
+            ) : (
+              // Your non-editing display for the quote
+              <>
+                <h2 className={styles.quoteText}>{quoteData.quote}</h2>
+                <label>{quoteData.name}, {quoteData.type}</label>
+                <div className={styles.actions}>
+                  <button onClick={() => handleEdit(index)}>
+                    <FontAwesomeIcon icon={faEdit} />
+                  </button>
+                  <button onClick={() => handleDelete(index)}>
+                    <FontAwesomeIcon icon={faTrash} />
+                  </button>
+                </div>
+              </>
+            )}
           </div>
         ))}
-
-
-          {deleteIndex !== -1 && (
+        {deleteIndex !== -1 && (
           <div className={styles.deleteConfirmation}>
             <p>Are you sure you want to delete this quote?</p>
             <button className={styles.confirmButton} onClick={confirmDelete}>
@@ -185,8 +279,17 @@ export default function ResponsiveDialog() {
           </div>
         )}
 
-        </div> 
-    
-  </div>
+        {
+          loading === true ? <h3>Loading.....</h3> : (
+            posts.map((post, index) => (
+              <div key={index}>
+                <h3>{post.title}</h3>
+              </div>
+            ))
+          )
+        }
+        <button onClick={handleAddPost}>Add Post</button>
+      </div>
+    </div>
   );
 }

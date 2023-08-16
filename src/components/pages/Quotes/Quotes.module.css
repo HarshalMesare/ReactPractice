@@ -1,4 +1,4 @@
-.boxvox{
+.boxvox {
   background-color: rgb(214, 233, 238);
   font-size: medium;
   align-content: center;
@@ -31,21 +31,24 @@
 
 .addButtonContainer {
   display: flex;
-  justify-content: flex-end; 
-  padding: 20px 0; 
+  justify-content: flex-end;
+  padding: 20px 0;
 }
 
 .addButton {
-  margin-left: auto; 
+  margin-left: auto;
 }
+
 .addButtonContainer {
   display: flex;
-  justify-content: flex-end; 
-  padding: 20px 0; 
+  justify-content: flex-end;
+  padding: 20px 0;
 }
+
 .addButton {
-  margin-left: auto; 
+  margin-left: auto;
 }
+
 .savedQuotesList {
   list-style-type: none;
   padding: 0;
@@ -60,8 +63,9 @@
 .divider {
   margin: 10px 0;
 }
+
 .savedQuotesTable {
-  width: 100%;    
+  width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
 }
@@ -83,11 +87,23 @@
   font-weight: bold;
   background-color: #eee;
 }
-.savedQuotes {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 20px;
+
+.savedQuote {
+  width: auto;
+  max-width: 900px;
+  padding: 40px 50px;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 10px 10px 10px rgba(0, 0, 0, 0.2);
+  margin-top: 100px;
+  margin-right: 120px;
+  margin-left: 400px;
+  text-align: center;
+  display: grid;
+  grid-template-rows: max-content min-content, min-content;
+  row-gap: 20px;
+  transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+
 }
 
 .savedQuote {
@@ -99,9 +115,10 @@
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.quoteText {
-  font-size: 18px;
-  font-weight: bold;
+.quotesText {
+  font-size: 25px;
+  margin: 0;
+  font-family: cursive;
 }
 
 .detailText {
@@ -120,6 +137,7 @@
   border: none;
   cursor: pointer;
 }
+
 .deleteConfirmation {
   background-color: #f7f7f7;
   padding: 20px;
