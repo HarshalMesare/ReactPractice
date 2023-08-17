@@ -3,6 +3,7 @@ import Navbar from './generics/Navbar/Navbar'
 import styles from './About.module.css';
 export const About = () => {
   const [] = useState("Enable Dark Mode")
+  
   return (
     <div className={styles.homePage}>
       {/* navbar start here */}

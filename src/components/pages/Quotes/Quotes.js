@@ -1,12 +1,10 @@
 // import * as React from 'react';
-import React, { useState } from 'react'
+import React from 'react'
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogTitle from '@mui/material/DialogTitle';
 import Navbar from '../../generics/Navbar/Navbar';
-import useMediaQuery from '@mui/material/useMediaQuery';
-import { useTheme } from '@mui/material/styles';
 import styles from './Quotes.module.css'
 import { DialogContent } from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
@@ -15,29 +13,19 @@ import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
-// import { usersActions } from '../../../redux/slices/users.slice';
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
-import axios from 'axios';
-
 
 
 export default function ResponsiveDialog() {
-  const dispatch = useDispatch();
-  const userData = useSelector((state) => state.userData.users);
   const [open, setOpen] = React.useState(false);
   const [quote, setQuote] = React.useState('');
   const [name, setName] = React.useState('');
   const [timestamp, setTimestamp] = React.useState('');
   const [country, setCountry] = React.useState('');
   const [type, setType] = React.useState('');
-  const theme = useTheme();
   const [savedData, setSavedData] = React.useState([]);
   const [editIndex, setEditIndex] = React.useState(-1);
   const [deleteIndex, setDeleteIndex] = React.useState(-1);
   const savedQuotesRef = React.useRef(null);
-  const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(false);
 
 
   const handleClickOpen = () => {
@@ -108,45 +96,7 @@ export default function ResponsiveDialog() {
     setDeleteIndex(-1);
   };
 
-  useEffect(() => {
-    loadPosts();
-  }, []);
-
-  async function loadPosts() {
-    setLoading(true);
-    try {
-      const response = await axios.get('https://jsonplaceholder.typicode.com/posts');
-      if (response.status === 200) {
-        setPosts(response.data);
-      }
-      setLoading(false);
-    } catch (exception) {
-      console.log(exception);
-      setLoading(false);
-    }
-  }
-
-  async function handleAddPost() {
-    setLoading(true);
-    try {
-      const params = {
-        title: 'Test Post',
-        body: 'Content Dummy',
-        userId: 1
-      };
-      const response = await axios.post('https://jsonplaceholder.typicode.com/posts', params);
-      if (response.status === 201) {
-        alert('Post successfully created!');
-      }
-      setLoading(false);
-
-    } catch (exception) {
-      console.log(exception);
-      setLoading(false);
-    }
-  }
-
-  return (
+ return (
     <div>
       <Navbar />
       <div className={styles.addButtonContainer}>
@@ -277,18 +227,7 @@ export default function ResponsiveDialog() {
               No
             </button>
           </div>
-        )}
-
-        {
-          loading === true ? <h3>Loading.....</h3> : (
-            posts.map((post, index) => (
-              <div key={index}>
-                <h3>{post.title}</h3>
-              </div>
-            ))
-          )
-        }
-        <button onClick={handleAddPost}>Add Post</button>
+        )}       
       </div>
     </div>
   );

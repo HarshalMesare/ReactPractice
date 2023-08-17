@@ -4,6 +4,11 @@ const userState = {
   users: [],
 };
 
+const initialState = {
+  posts: [],
+  loading: false
+};
+
 const usersSlice = createSlice({
   name: 'users',
   initialState: userState,
@@ -19,7 +24,7 @@ const usersSlice = createSlice({
       const index = action.payload;
       state.users.splice(index, 1);
     },
-  },
+  },    
 
 });
 
