@@ -1,12 +1,11 @@
-import { createStore } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import rootReducer from './root-reducer';
-// import { configureStore } from '@reduxjs/toolkit';
-// import postsReducer from './postsSlice';
+import { configureStore } from '@reduxjs/toolkit';
 
 const composedEnhancer = composeWithDevTools();
 
-const store = createStore(rootReducer, composedEnhancer);
-
+const store = configureStore({
+  reducer: rootReducer,composedEnhancer,
+});
 
 export default store;  

@@ -74,7 +74,7 @@ export default function ResponsiveDialog() {
       color += letters[Math.floor(Math.random() * 16)];
     }
     return color;
-  }
+  }   
 
   const handleEdit = (index) => {
     const editedQuote = savedData[index];
